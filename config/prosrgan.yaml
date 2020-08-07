@@ -1,0 +1,68 @@
+D:
+  act_params: {negative_slope: 0.2}
+  act_type: LRELU
+  input_residual: true
+  ndf: 64
+  scale_overhead: true
+  update_freq: 2
+  use_lsgan: true
+  warmup_epochs: 0
+  which_epoch: latest
+  which_model_netD: srgan
+G:
+  bn_size: 4
+  growth_rate: 40
+  level_compression: -1
+  level_config1:
+  - [8, 8, 8, 8, 8, 8, 8, 8, 8]
+  - [8, 8, 8]
+  - [8]
+  level_config:
+  - [8, 8, 8, 8, 8]
+  - [8, 8]
+  - [8]
+  max_num_feature: 312
+  num_init_features: 160
+  ps_woReLU: false
+  res_factor: 0.2
+  residual_denseblock: true
+  vgg: [2, 4]
+  vgg_mean_pool: true
+data:
+  input_size: [48, 36, 24]
+  img_size: 1024
+  scale: [2, 4, 8]
+test:
+  dataset:
+    downscale: false
+    mean: [0.4488, 0.4371, 0.404]
+    path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/test'
+    stddev: [0.0039215, 0.0039215, 0.0039215]
+  fast_validation: -1
+train:
+  D_lr: 0.0001
+  batch_size: 1
+  dataset:
+    downscale: false
+    mean: [0.4488, 0.4371, 0.404]
+    path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/train'
+    stddev: [0.0039215, 0.0039215, 0.0039215]
+  epochs: 200
+  gan_loss_weight: 1
+  growing_steps: [0.12, 0.25, 0.45, 0.65, 1.0]
+  growing_steps1: [0.003, 0.007, 0.015, 0.6, 1.0]
+  io: {eval_epoch_freq: 10, print_errors_freq: 300, save_model_freq: 10, save_img_freq: 1200}
+  l1_loss_weight: 0
+  lr: 0.0001
+  lr_decay: 0.5
+  lr_schedule_patience: 6
+  smallest_lr: 1.0e-05
+  vgg_loss_weight: [0.5, 2]
+xtra:
+  out_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/boost_exp'
+  save_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/saved_images'
+  test_save_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/tested_images'
+  seed: 12
+  high_res: 512
+  img_type: '.tif'
+  file_sep: '/'
